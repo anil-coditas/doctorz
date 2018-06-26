@@ -1,0 +1,54 @@
+
+<div *ngIf="school">
+    <h2><span jhiTranslate="doctorzApp.school.detail.title">School</span> {{school.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="doctorzApp.school.schoolName">School Name</span></dt>
+        <dd>
+            <span>{{school.schoolName}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.area">Area</span></dt>
+        <dd>
+            <span>{{school.area}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.city">City</span></dt>
+        <dd>
+            <span>{{school.city}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.pin">Pin</span></dt>
+        <dd>
+            <span>{{school.pin}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.state">State</span></dt>
+        <dd>
+            <span>{{school.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.address">Address</span></dt>
+        <dd>
+            <span>{{school.address}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.country">Country</span></dt>
+        <dd>
+            <span>{{school.country}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.school.email">Email</span></dt>
+        <dd>
+            <span>{{school.email}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'school/'+ school.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

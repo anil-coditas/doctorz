@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span jhiTranslate="doctorzApp.school.home.title">Schools</span>
+        <button class="btn btn-primary float-right jh-create-entity create-school" [routerLink]="['/', { outlets: { popup: ['school-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="doctorzApp.school.home.createLabel">
+            Create new School
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="schools">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="schoolName"><span jhiTranslate="doctorzApp.school.schoolName">School Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="area"><span jhiTranslate="doctorzApp.school.area">Area</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="city"><span jhiTranslate="doctorzApp.school.city">City</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="pin"><span jhiTranslate="doctorzApp.school.pin">Pin</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="state"><span jhiTranslate="doctorzApp.school.state">State</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="address"><span jhiTranslate="doctorzApp.school.address">Address</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="country"><span jhiTranslate="doctorzApp.school.country">Country</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="email"><span jhiTranslate="doctorzApp.school.email">Email</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let school of schools ;trackBy: trackId">
+                <td><a [routerLink]="['../school', school.id ]">{{school.id}}</a></td>
+                <td>{{school.schoolName}}</td>
+                <td>{{school.area}}</td>
+                <td>{{school.city}}</td>
+                <td>{{school.pin}}</td>
+                <td>{{school.state}}</td>
+                <td>{{school.address}}</td>
+                <td>{{school.country}}</td>
+                <td>{{school.email}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../school', school.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'school/'+ school.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'school/'+ school.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="schools && schools.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

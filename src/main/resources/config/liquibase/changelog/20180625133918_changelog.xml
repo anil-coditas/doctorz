@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="Anil P (generated)" id="1529933993270-1">
+      <addColumn tableName="school">
+         <column name="email" type="varchar(255)">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1529933993270-2">
+      <addColumn tableName="school">
+         <column name="pin" type="varchar(255)">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1529933993270-3">
+      <addNotNullConstraint columnDataType="varchar(255)"
+                            columnName="address"
+                            tableName="school"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1529933993270-4">
+      <addNotNullConstraint columnDataType="varchar(255)" columnName="area" tableName="school"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1529933993270-5">
+      <addNotNullConstraint columnDataType="varchar(255)" columnName="city" tableName="school"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1529933993270-6">
+      <addNotNullConstraint columnDataType="varchar(255)"
+                            columnName="country"
+                            tableName="school"/>
+   </changeSet>
+</databaseChangeLog>

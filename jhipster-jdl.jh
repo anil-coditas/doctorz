@@ -1,0 +1,188 @@
+entity Student {
+    uID String required,
+	firstName String required,
+    lastName String required,
+    dob Date required,
+    gender String required,
+    contactNo String,
+    age String,
+    parentFirstName String,
+    parentLastName String,
+    highRiskTag Boolean,
+    schoolName String,
+    class String,
+    division String
+}
+
+entity School {
+	schoolID String required, 
+	schoolName String required,
+    state String required,
+    city String,
+    pin String,
+    area String,
+    addressl1 String,
+    emailId String,
+    status String
+}
+
+entity User {
+	id Integer required,
+    login String required,
+    password String required,
+    firstName String required,
+    lastName String required,
+    email String required,
+    imageUrl String ,
+    langKey String,
+    activated Integer,
+    resetKey String,
+    createdBy String,
+    createdDate Date,
+    resetDate Date,
+    lastModifiedBy String,
+    lastModifiedDate Date
+}
+entity ContactPerson{
+	schoolName String required,
+	name String required,
+    contactNo String,
+    email String,
+    designation String
+}
+
+entity Doctor {
+	id String required,
+    qualification String,
+    contactNo Long required,
+    speciality String required,
+    resumePath String
+}
+
+entity PediatricianReport {
+	id String required,
+    studentID String required,
+    dateOfSubmission Date required,
+    overAllHygiene Character,
+    nailsHygiene Character,
+    vaccinationStatus String,
+    recurrentInfections String,
+    looksPale String,
+    crackedLips String,
+    recurrentOralUlcer String,
+    legPainsNight String,
+    longStandingIllness String,
+    weight Integer,
+    height Integer,
+    bmi Integer,
+    pulse String,
+    bloodPressure Integer,
+    rightEar Character,
+    leftEar Character,
+    hearingRightEar Character,
+    hearingLeftEar Character,
+    remark String,
+    updatedBy String,
+    dateOfUpdation Date
+}
+
+entity DentistReport {
+	id String required,
+    studentID String required,
+    dateOfSubmission Date required,
+    dentalProblem String,
+    dentalOcclusion String,
+    gums String,
+    breath String,
+    remark String
+}
+
+entity PsychiatristReport {
+	id String required,
+    studentID String required,
+    dateOfSubmission Date required,
+    writeReverse Character,
+    booksIncomplete Character,
+    spellingMistakes Character,
+    readWriteDifficulty Character,
+    roamsAround Character,
+    distractable Character,
+    talksDisrupts Character,
+    incompleteTasks Character,
+    losesThings Character,
+    poorEyeContact Character,
+    playsAloneRepetitive Character,
+    lacksSpeech Character,
+    selfAbsorbed Character,
+    agressive Character,
+    deteriorationGrades Character,
+    complainOfUnwell Character,
+    hitOthers Character,
+    losesTemper Character,
+    notComplyInstruction Character,
+    mediaAddiction Charater,
+    substanceAbuse Character,
+    remark String
+}
+
+entity SkinSpecialistReport {
+	id String required,
+    studentID String required,
+    dateOfSubmission Date required,
+    remark String
+}
+
+entity OphthalmologistReport {
+	id String required,
+    studentID String required,
+    dateOfSubmission Date required,
+    glasses String,
+    rightEyeVision String,
+    leftEyeVision String,
+    remark String
+}
+
+entity Speciality {
+	id String required,
+    desc String required
+}
+
+
+relationship OneToOne {
+	User{id} to Doctor
+}
+// an ignored comment
+/** not an ignored comment */
+
+relationship OneToMany {
+	School{schoolName} to Student
+    School{schoolName} to ContactPerson
+    Student{studentName} to OphthalmologistReport
+    Student{studentName} to SkinSpecialistReport
+    Student{studentName} to PsychiatristReport
+    Student{studentName} to DentistReport
+    Student{studentName} to PediatricianReport
+    
+    Doctor{doctorID} to OphthalmologistReport
+    Doctor{doctorID} to SkinSpecialistReport
+    Doctor{doctorID} to PsychiatristReport
+    Doctor{doctorID} to DentistReport
+    Doctor{doctorID} to PediatricianReport
+}
+
+relationship ManyToMany {
+	School{schoolID(id)} to User
+	School{schoolID(name)} to Speciality
+    Doctor{speciality(name)} to Speciality
+}
+
+
+// Set pagination options
+paginate Student, School, Doctor, User with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Location
+// Set an angular suffix
+angularSuffix * with mySuffix
