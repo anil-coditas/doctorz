@@ -112,6 +112,8 @@ public class UserService {
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
         user.setImageUrl(userDTO.getImageUrl());
+        user.setMobNumber(userDTO.getMobNumber());
+        user.setDesignation(userDTO.getDesignation());
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
@@ -239,6 +241,28 @@ public class UserService {
      */
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
+    }
+    /**
+     * Assigns selected authorities to user
+     * @param userDTO
+     * @return
+     */
+    public Optional<UserDTO> assignAuthorities(User userWithAuths) {
+    	UserDTO userDTO = new UserDTO();
+    	userDTO.setId(userWithAuths.getId());
+    	userDTO.setAuthoritiesObject(userWithAuths.getAuthorities());
+        return Optional.of(userRepository
+            .findOne(userDTO.getId()))
+            .map(user -> {
+                Set<Authority> managedAuthorities = user.getAuthorities();
+                managedAuthorities.clear();
+                userDTO.getAuthorities().stream()
+                    .map(authorityRepository::findOne)
+                    .forEach(managedAuthorities::add);
+                log.debug("Changed Information for User: {}", user);
+                return user;
+            })
+            .map(UserDTO::new);
     }
 
 }

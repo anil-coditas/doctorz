@@ -5,12 +5,15 @@ import com.tpn.doctorz.config.Constants;
 import com.tpn.doctorz.domain.Authority;
 import com.tpn.doctorz.domain.User;
 
+import scala.collection.mutable.HashSet;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +27,12 @@ public class UserDTO {
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
+    
+    @Pattern(regexp = "^[789]\\d{9}$", message = "Invalid mobile number")
+    @Size(max = 20)
+    private String mobNumber;
+    
+    private String designation;
 
     @Size(max = 50)
     private String firstName;
@@ -70,6 +79,8 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.mobNumber = user.getMobNumber();
+        this.designation = user.getDesignation();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
@@ -178,8 +189,32 @@ public class UserDTO {
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
+    
+    public void setAuthoritiesObject(Set<Authority> authorities) {
+    	Set<String> strAuths = new TreeSet<>();
+    	for(Authority auth: authorities) {
+    		strAuths.add(auth.getName());
+    	}
+    	this.authorities = strAuths;
+    }
+    
+    public String getMobNumber() {
+		return mobNumber;
+	}
 
-    @Override
+	public void setMobNumber(String mobNUmber) {
+		this.mobNumber = mobNUmber;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	@Override
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +
@@ -187,6 +222,8 @@ public class UserDTO {
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
+            ", mobile='" + mobNumber + '\'' +
+            ", designation='" + designation + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
             ", createdBy=" + createdBy +
