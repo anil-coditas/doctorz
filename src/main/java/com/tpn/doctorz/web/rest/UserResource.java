@@ -2,6 +2,7 @@ package com.tpn.doctorz.web.rest;
 
 import com.tpn.doctorz.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.tpn.doctorz.domain.Authority;
 import com.tpn.doctorz.domain.User;
 import com.tpn.doctorz.repository.UserRepository;
 import com.tpn.doctorz.security.AuthoritiesConstants;
@@ -17,6 +18,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.actuate.autoconfigure.ShellProperties.Auth;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -186,5 +188,16 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    }
+    
+    @PostMapping("/users/assingAuthorities/{login:" + Constants.LOGIN_REGEX + "}")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<Void> assignAuthorities(@PathVariable String login, @RequestBody Set<Authority> auths) {
+    	log.debug("REST request to assign authorities: {}", login);
+    	Optional<User> user = userRepository.findOneByLogin(login);
+    	user.get().getAuthorities().addAll(auths);
+    	userService.assignAuthorities(user.get());
+    	return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.authorityAssigned", login)).build();
     }
 }

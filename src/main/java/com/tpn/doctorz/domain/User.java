@@ -37,6 +37,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
+    
+    @Pattern(regexp = "^[789]\\d{9}$", message = "Invalid mobile number")
+    @Column(name= "mob_number", length = 20, unique = true, nullable = false)
+    private String mobNumber;
+    
+    @Column(name= "designation", length = 40)
+    private String designation;
 
     @JsonIgnore
     @NotNull
@@ -83,7 +90,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Instant resetDate = null;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "jhi_user_authority",
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
@@ -197,7 +204,23 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    @Override
+    public String getMobNumber() {
+		return mobNumber;
+	}
+
+	public void setMobNumber(String mobNumber) {
+		this.mobNumber = mobNumber;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -222,6 +245,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", mobile='" + mobNumber + '\'' +
+            ", designation='" + designation + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +

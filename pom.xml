@@ -325,6 +325,18 @@
             <artifactId>spring-security-data</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+<<<<<<< HEAD
+=======
+        <dependency>
+        	<groupId>io.swagger</groupId>
+        	<artifactId>swagger-codegen-maven-plugin</artifactId>
+        	<version>2.2.3</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+>>>>>>> b9b64ee685cba94c8fd2c780a9ec62b4811fe1b9
     </dependencies>
 
     <build>
