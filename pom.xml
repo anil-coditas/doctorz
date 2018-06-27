@@ -336,6 +336,9 @@
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
+<<<<<<< HEAD
+>>>>>>> b9b64ee685cba94c8fd2c780a9ec62b4811fe1b9
+=======
 >>>>>>> b9b64ee685cba94c8fd2c780a9ec62b4811fe1b9
     </dependencies>
 
