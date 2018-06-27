@@ -23,7 +23,8 @@
             "state": "State",
             "address": "Address",
             "country": "Country",
-            "email": "Email"
+            "email": "Email",
+            "user_school_mapping": "User School Mapping"
         }
     }
 }

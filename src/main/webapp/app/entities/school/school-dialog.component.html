@@ -101,6 +101,18 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label jhiTranslate="doctorzApp.school.user_school_mapping" for="field_user_school_mapping">User School Mapping</label>
+            <select class="form-control" id="field_user_school_mapping" multiple name="user_school_mapping" [(ngModel)]="school.user_school_mappings" required>
+                <option [ngValue]="getSelected(school.user_school_mappings, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user_school_mapping?.dirty && editForm.controls.user_school_mapping?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user_school_mapping?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

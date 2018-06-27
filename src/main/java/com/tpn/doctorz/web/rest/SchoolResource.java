@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Cacheable;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -105,22 +104,13 @@ public class SchoolResource {
      * @param id the id of the school to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the school, or with status 404 (Not Found)
      */
-//    @GetMapping("/schools/{id}")
-//    @Timed
-//    public ResponseEntity<School> getSchool(@PathVariable Long id) {
-//        log.debug("REST request to get School : {}", id);
-//        School school = schoolRepository.findOne(id);
-//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(school));
-//    }
-        
-  @GetMapping("/schools/{schoolName}")
-  @Timed
-  public ResponseEntity<List<School>> getSchool(@PathVariable String schoolName) {
-      log.debug("REST request to get School : {}", schoolName);
-      List<School> school = schoolRepository.getNamesLike(schoolName);
-      return ResponseUtil.wrapOrNotFound(Optional.ofNullable(school));
-  }
-  
+    @GetMapping("/schools/{id}")
+    @Timed
+    public ResponseEntity<School> getSchool(@PathVariable Long id) {
+        log.debug("REST request to get School : {}", id);
+        School school = schoolRepository.findOneWithEagerRelationships(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(school));
+    }
 
     /**
      * DELETE  /schools/:id : delete the "id" school.

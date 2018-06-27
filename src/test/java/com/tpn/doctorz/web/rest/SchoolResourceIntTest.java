@@ -3,6 +3,7 @@ package com.tpn.doctorz.web.rest;
 import com.tpn.doctorz.DoctorzApp;
 
 import com.tpn.doctorz.domain.School;
+import com.tpn.doctorz.domain.User;
 import com.tpn.doctorz.repository.SchoolRepository;
 import com.tpn.doctorz.web.rest.errors.ExceptionTranslator;
 
@@ -108,6 +109,11 @@ public class SchoolResourceIntTest {
             .address(DEFAULT_ADDRESS)
             .country(DEFAULT_COUNTRY)
             .email(DEFAULT_EMAIL);
+        // Add required entity
+        User user_school_mapping = UserResourceIntTest.createEntity(em);
+        em.persist(user_school_mapping);
+        em.flush();
+        school.getUser_school_mappings().add(user_school_mapping);
         return school;
     }
 

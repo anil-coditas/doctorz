@@ -1,4 +1,4 @@
-import { BaseEntity } from './../../shared';
+import { BaseEntity, User } from './../../shared';
 
 export class School implements BaseEntity {
     constructor(
@@ -11,6 +11,7 @@ export class School implements BaseEntity {
         public address?: string,
         public country?: string,
         public email?: string,
+        public user_school_mappings?: User[],
     ) {
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="Anil P (generated)" id="1530081935106-1">
+      <createTable tableName="school_user_school_mapping">
+         <column name="schools_id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+         <column name="user_school_mappings_id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+      </createTable>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1530081935106-2">
+      <addPrimaryKey columnNames="schools_id, user_school_mappings_id"
+                     tableName="school_user_school_mapping"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1530081935106-3">
+      <addUniqueConstraint columnNames="mob_number"
+                           constraintName="UC_JHI_USERMOB_NUMBER_COL"
+                           tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1530081935106-4">
+      <addForeignKeyConstraint baseColumnNames="schools_id"
+                               baseTableName="school_user_school_mapping"
+                               constraintName="FKamg7oy1u67kxmtqii65jpvgwt"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="school"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1530081935106-5">
+      <addForeignKeyConstraint baseColumnNames="user_school_mappings_id"
+                               baseTableName="school_user_school_mapping"
+                               constraintName="FKnbsrcckdjlra7pxy5q4g674py"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Anil P (generated)" id="1530081935106-6">
+      <addNotNullConstraint columnDataType="varchar(20)"
+                            columnName="mob_number"
+                            tableName="jhi_user"/>
+   </changeSet>
+</databaseChangeLog>

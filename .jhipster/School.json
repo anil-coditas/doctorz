@@ -1,6 +1,18 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "user_school_mapping",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-many",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "school"
+        }
+    ],
     "fields": [
         {
             "fieldName": "schoolName",
@@ -51,7 +63,7 @@
                 "required"
             ]
         },
-		{
+        {
             "fieldName": "email",
             "fieldType": "String",
             "fieldValidateRules": [

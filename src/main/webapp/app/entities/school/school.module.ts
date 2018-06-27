@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { DoctorzSharedModule } from '../../shared';
+import { DoctorzAdminModule } from '../../admin/admin.module';
 import {
     SchoolService,
     SchoolPopupService,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         DoctorzSharedModule,
+        DoctorzAdminModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

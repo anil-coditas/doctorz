@@ -57,6 +57,17 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
+        <createTable tableName="school_user_school_mapping">
+            <column name="user_school_mappings_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schools_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="schools_id, user_school_mappings_id" tableName="school_user_school_mapping"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

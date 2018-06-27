@@ -253,4 +253,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             "}";
     }
+
+	public Set<User> getSchools() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

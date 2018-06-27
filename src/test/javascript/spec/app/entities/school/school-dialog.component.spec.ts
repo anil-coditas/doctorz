@@ -9,6 +9,7 @@ import { DoctorzTestModule } from '../../../test.module';
 import { SchoolDialogComponent } from '../../../../../../main/webapp/app/entities/school/school-dialog.component';
 import { SchoolService } from '../../../../../../main/webapp/app/entities/school/school.service';
 import { School } from '../../../../../../main/webapp/app/entities/school/school.model';
+import { UserService } from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 
@@ -24,6 +25,7 @@ describe('Component Tests', () => {
                 imports: [DoctorzTestModule],
                 declarations: [SchoolDialogComponent],
                 providers: [
+                    UserService,
                     SchoolService
                 ]
             })

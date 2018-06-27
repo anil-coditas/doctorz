@@ -5,13 +5,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
  * A School.
  */
 @Entity
-@Cacheable(true)
 @Table(name = "school")
 public class School implements Serializable {
 
@@ -52,6 +53,13 @@ public class School implements Serializable {
     @NotNull
     @Column(name = "email", nullable = false)
     private String email;
+
+    @ManyToMany
+    @NotNull
+    @JoinTable(name = "school_user_school_mapping",
+               joinColumns = @JoinColumn(name="schools_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="user_school_mappings_id", referencedColumnName="id"))
+    private Set<User> user_school_mappings = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -164,6 +172,31 @@ public class School implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<User> getUser_school_mappings() {
+        return user_school_mappings;
+    }
+
+    public School user_school_mappings(Set<User> users) {
+        this.user_school_mappings = users;
+        return this;
+    }
+
+//    public School addUser_school_mapping(User user) {
+//        this.user_school_mappings.add(user);
+//        user.getSchools().add(this);
+//        return this;
+//    }
+
+    public School removeUser_school_mapping(User user) {
+        this.user_school_mappings.remove(user);
+        user.getSchools().remove(this);
+        return this;
+    }
+
+    public void setUser_school_mappings(Set<User> users) {
+        this.user_school_mappings = users;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
