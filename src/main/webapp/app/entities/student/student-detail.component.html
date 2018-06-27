@@ -1,0 +1,76 @@
+
+<div *ngIf="student">
+    <h2><span jhiTranslate="doctorzApp.student.detail.title">Student</span> {{student.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="doctorzApp.student.firstName">First Name</span></dt>
+        <dd>
+            <span>{{student.firstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{student.lastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.dob">Dob</span></dt>
+        <dd>
+            <span>{{student.dob | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.gender">Gender</span></dt>
+        <dd>
+            <span>{{student.gender}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.contactNo">Contact No</span></dt>
+        <dd>
+            <span>{{student.contactNo}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.age">Age</span></dt>
+        <dd>
+            <span>{{student.age}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.parentFirstName">Parent First Name</span></dt>
+        <dd>
+            <span>{{student.parentFirstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.parentLastName">Parent Last Name</span></dt>
+        <dd>
+            <span>{{student.parentLastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.highRiskTag">High Risk Tag</span></dt>
+        <dd>
+            <span>{{student.highRiskTag}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.studentClass">Student Class</span></dt>
+        <dd>
+            <span>{{student.studentClass}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.division">Division</span></dt>
+        <dd>
+            <span>{{student.division}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.status">Status</span></dt>
+        <dd>
+            <span>{{student.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorzApp.student.school">School</span></dt>
+        <dd>
+            <div *ngIf="student.school">
+                <a [routerLink]="['/school', student.school?.id]">{{student.school?.schoolName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'student/'+ student.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

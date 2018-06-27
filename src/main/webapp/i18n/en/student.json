@@ -1,0 +1,34 @@
+
+{
+    "doctorzApp": {
+        "student" : {
+            "home": {
+                "title": "Students",
+                "createLabel": "Create a new Student",
+                "createOrEditLabel": "Create or edit a Student"
+            },
+            "created": "A new Student is created with identifier {{ param }}",
+            "updated": "A Student is updated with identifier {{ param }}",
+            "deleted": "A Student is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Student {{ id }}?"
+            },
+            "detail": {
+                "title": "Student"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "dob": "Dob",
+            "gender": "Gender",
+            "contactNo": "Contact No",
+            "age": "Age",
+            "parentFirstName": "Parent First Name",
+            "parentLastName": "Parent Last Name",
+            "highRiskTag": "High Risk Tag",
+            "studentClass": "Student Class",
+            "division": "Division",
+            "status": "Status",
+            "school": "School"
+        }
+    }
+}

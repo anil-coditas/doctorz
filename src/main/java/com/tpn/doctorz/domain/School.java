@@ -11,6 +11,7 @@ import java.util.Objects;
  * A School.
  */
 @Entity
+@Cacheable(true)
 @Table(name = "school")
 public class School implements Serializable {
 

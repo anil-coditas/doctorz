@@ -17,6 +17,7 @@ public class SchoolRepositoryImpl implements SchoolRepositoryCustom {
     public List<School> getNamesLike(String schoolName) {
         Query query = entityManager.createNativeQuery("SELECT * FROM school t WHERE t.school_name LIKE ?", School.class);
         query.setParameter(1, schoolName + "%");
+        System.out.println("In dao");
         return query.getResultList();
     }
 
